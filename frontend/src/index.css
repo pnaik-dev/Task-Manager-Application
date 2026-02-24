@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 47.4% 11.2%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 47.4% 11.2%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 47.4% 11.2%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 47.4% 11.2%;
+  --chart-1: 160 60% 50%;
+  --chart-2: 200 60% 50%;
+  --chart-3: 40 80% 50%;
+  --chart-4: 300 60% 50%;
+  --chart-5: 10 80% 50%;
+  --glass-bg: rgba(255, 255, 255, 0.3); /* Light mode glass background */
+  --glass-border: rgba(216, 221, 235, 0.832); /* Light mode glass border */
+}
+
+.dark {
+  --background: 228, 65%, 5%;
+  --foreground: 228,65%,99%;
+  --card: 225, 29%, 13%;
+  --card-foreground: 240 10% 98%;
+  --popover: 240 10% 10%;
+  --popover-foreground: 240 10% 98%;
+  --primary: 220 50% 75%;
+  --primary-foreground: 240 10% 10%;
+  --secondary: 220 30% 20%;
+  --secondary-foreground: 240 10% 98%;
+  --muted: 220 20% 16%;
+  --muted-foreground: 220 10% 60%;
+  --accent: 220 30% 20%;
+  --accent-foreground: 240 10% 98%;
+  --destructive: 0 70% 60%;
+  --destructive-foreground: 240 10% 98%;
+  --border: 220 20% 18%;
+  --input: 220 20% 18%;
+  --ring: 220 50% 75%;
+  --chart-1: 160 60% 50%;
+  --chart-2: 200 60% 50%;
+  --chart-3: 40 80% 50%;
+  --chart-4: 300 60% 50%;
+  --chart-5: 10 80% 50%;
+  --glass-bg: rgba(24, 28, 43,0.5); /* Dark mode glass background */
+  --glass-border: rgba(53, 54, 56, 0.8); /* Dark mode glass border */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground  font-sans bg-gray-50 dark:bg-gray-900;
+    font-family: 'Montserrat', sans-serif;
+
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    @apply bg-input text-foreground border-border focus:ring-ring focus:border-ring focus:outline-none rounded-xl;
+  }
+}
+
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+    height: 8px; /* Height of the scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--muted); /* Color of the track */
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary); /* Color of the scrollbar thumb */
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-foreground); /* Color of the scrollbar thumb on hover */
+  }
