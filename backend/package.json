@@ -5,9 +5,7 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "dev": "nodemon server.js",
-        "build": "echo 'No build step required'",
-        "postinstall": "npm cache clean --force && npm rebuild bcrypt --platform=linux --arch=x64 --verbose"
+        "dev": "nodemon server.js"
     },
     "author": "",
     "dependencies": {
