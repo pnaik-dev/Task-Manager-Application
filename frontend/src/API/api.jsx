@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Create a common api for all the apis
-const baseUrl = 'http://localhost:3000';
+const baseUrl = import.meta.env.VITE_API_URL;
 const apiClient = axios.create({
   baseURL: baseUrl,
   headers: {
