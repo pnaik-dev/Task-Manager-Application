@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Task Manager Application
 
 A full-stack task management platform featuring secure authentication, protected APIs, and a modern responsive user interface.
@@ -70,7 +69,7 @@ Create a `.env` file in the backend directory:
 
 ```
 # Server
-PORT=5000
+PORT=3000
 
 # Database
 MONGO_URI=your_mongodb_connection_string
@@ -85,7 +84,7 @@ SALT_ROUNDS=10
 Create a `.env` file in the client directory:
 
 ```
-VITE_API_URL=http://localhost:5000
+VITE_API_URL=http://localhost:5173
 ```
 
 ## Setup Instructions
@@ -140,6 +139,4 @@ https://task-manager-rust-three.vercel.app/
 
 Email: testuser@gmail.com  
 Password: Test@123  
-=======
 
->>>>>>> 9881c6576bc2d23c8d32cbc70348d3336b4a2b37
