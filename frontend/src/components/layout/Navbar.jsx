@@ -8,15 +8,15 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 export default function Navbar() {
-    const user = useSelector(selectUser);
-    const dispatch = useDispatch();
-    const { theme, toggleTheme } = useContext(ThemeContext);
-    const navigate = useNavigate();
+    const user = useSelector(selectUser); // Get user details
+    const dispatch = useDispatch(); // Dispatch actions
+    const { theme, toggleTheme } = useContext(ThemeContext); // Access theme context
+    const navigate = useNavigate(); // For navigation
 
-    const handleLogout = async() => {
-        await dispatch(logoutUser());
-        toast("Logged out successfully!");
-        navigate("/signup")
+    const handleLogout = async() => { // Function to handle logout
+        await dispatch(logoutUser()); // Dispatch logout action
+        toast("Logged out successfully!"); // Show success message
+        navigate("/signup") // Navigate to signup page
     };
 
     return (

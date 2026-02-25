@@ -5,27 +5,30 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { removeTaskAsync } from '../../store/reducers/taskReducer';
 
+// TaskCard component
 const TaskCard = React.memo(({ task }) => {
-  const dispatch = useDispatch();
-  const notify = () => toast("Task deleted successfully");
-  const [showModal, setShowModal] = React.useState(false);
+  const dispatch = useDispatch(); // Dispatch actions
+  const notify = () => toast("Task deleted successfully"); // Toast notification
+  const [showModal, setShowModal] = React.useState(false); // Modal state
 
-  const completedSubtasks = task.subtasks?.filter(task => task.status === "Completed").length ?? 0;
-  const totalSubtasks = task.subtasks?.length ?? 0;
-  const progress = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+  const completedSubtasks = task.subtasks?.filter(task => task.status === "Completed").length ?? 0; // Filter completed subtasks
+  const totalSubtasks = task.subtasks?.length ?? 0; // Total number of subtasks
+  const progress = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0; // Calculate progress
 
-  const handleDelete = (taskId) => {
-    dispatch(removeTaskAsync(taskId));
-    notify();
+  const handleDelete = (taskId) => { // Handle task deletion
+    dispatch(removeTaskAsync(taskId)); // Dispatch delete action
+    notify(); // Show toast notification
     setShowModal(false); // Close modal after deletion
   };
 
+  // Priority styles
   const priorityStyles = {
     High: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 ring-rose-500/20',
     Medium: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 ring-amber-500/20',
     Low: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 ring-emerald-500/20',
   };
 
+  // Progress bar styles
   const progressBarStyles = {
     High: 'bg-rose-500 dark:bg-rose-400',
     Medium: 'bg-amber-500 dark:bg-amber-400',

@@ -5,30 +5,31 @@ import { loginUser, selectUser, setErrors } from '../store/reducers/userReducer'
 import { z } from 'zod';
 import { toast } from 'react-toastify';
 
+// Login component
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(''); // Updated state
+  const [password, setPassword] = useState(''); // Updated state
   const [loading, setLoading] = useState(false); // New loading state
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { error } = useSelector(selectUser);
+  const dispatch = useDispatch(); // Get the dispatch function
+  const navigate = useNavigate(); // Get the navigate function
+  const { error } = useSelector(selectUser); // Access the error from the Redux store
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => { // Handle form submission
+    e.preventDefault(); // Prevent the default form submission behavior
     setLoading(true); // Set loading to true when starting login
     try {
-      const userSchema = z.object({
-        email: z.string().email(),
-        password: z.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&]{8,}$/, "Password must be at least 8 characters long and include an uppercase, a lowercase, a number, and a special character.")
+      const userSchema = z.object({ // Define the user schema
+        email: z.string().email(), // Email validation
+        password: z.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&]{8,}$/, "Password must be at least 8 characters long and include an uppercase, a lowercase, a number, and a special character.") // Password validation
       });
-      userSchema.parse({ email, password });
-      await dispatch(loginUser({ email, password })).unwrap();
-      toast.success("Logged in successfully!");
-      navigate("/");
+      userSchema.parse({ email, password }); // Validate the user data
+      await dispatch(loginUser({ email, password })).unwrap(); // Dispatch the loginUser action
+      toast.success("Logged in successfully!"); // Show success message
+      navigate("/"); // Navigate to the home page
     } catch (err) {
-      const errorMessages = err.issues ? err.issues.map(issue => issue.message) : err;
-      errorMessages.forEach(message => {
-        toast(message, { type: "error" });
+      const errorMessages = err.issues ? err.issues.map(issue => issue.message) : err; // Extract error messages
+      errorMessages.forEach(message => { // Loop through the error messages
+        toast(message, { type: "error" }); // Show error message
       });
     } finally {
       setLoading(false); // Set loading to false after login attempt

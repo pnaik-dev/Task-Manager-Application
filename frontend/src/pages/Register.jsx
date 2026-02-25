@@ -5,34 +5,35 @@ import { registerUser, selectUser } from '../store/reducers/userReducer';
 import { z } from 'zod';
 import { toast } from 'react-toastify';
 
+// Register component
 export default function Register() {
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [lastName, setLastName] = useState(''); 
+  const [email, setEmail] = useState(''); 
+  const [password, setPassword] = useState(''); 
   const [loading, setLoading] = useState(false); // New loading state
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { error } = useSelector(selectUser);
+  const dispatch = useDispatch(); // Get the dispatch function
+  const navigate = useNavigate(); //  Get the navigate function
+  const { error } = useSelector(selectUser); // Access the error from the Redux store
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => { // Handle form submission
+    e.preventDefault(); // Prevent the default form submission behavior
     setLoading(true); // Set loading to true when starting registration
     try {
-      const userSchema = z.object({
-        firstName: z.string().min(3, "firstName should contain at least 3 letters"),
-        lastName: z.string().min(3, "lastName should contain at least 3 letters"),
-        email: z.string().email(),
-        password: z.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&]{8,}$/, "Password must be at least 8 characters long and include an uppercase, a lowercase, a number, and a special character.")
+      const userSchema = z.object({ // Define the user schema
+        firstName: z.string().min(3, "firstName should contain at least 3 letters"), // First name validation
+        lastName: z.string().min(3, "lastName should contain at least 3 letters"), // Last name validation
+        email: z.string().email(), // Email validation
+        password: z.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&]{8,}$/, "Password must be at least 8 characters long and include an uppercase, a lowercase, a number, and a special character.") // Password validation
       });
-      userSchema.parse({ firstName, lastName, email, password });
-      await dispatch(registerUser({ firstName, lastName, email, password })).unwrap();
-      toast.success("Account created successfully!");
-      navigate("/signin");
+      userSchema.parse({ firstName, lastName, email, password }); // Validate the user data
+      await dispatch(registerUser({ firstName, lastName, email, password })).unwrap(); // Dispatch the registerUser action
+      toast.success("Account created successfully!"); // Show success message
+      navigate("/signin"); // Navigate to the sign-in page
     } catch (err) {
-      const errorMessages = err.issues ? err.issues.map(issue => issue.message) : [err.message];
-      errorMessages.forEach(message => {
-        toast(message, { type: "error" });
+      const errorMessages = err.issues ? err.issues.map(issue => issue.message) : [err.message]; // Extract error messages
+      errorMessages.forEach(message => { // Loop through the error messages
+        toast(message, { type: "error" }); // Show error message
       });
     } finally {
       setLoading(false); // Set loading to false after registration attempt

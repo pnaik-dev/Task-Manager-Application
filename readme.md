@@ -129,11 +129,6 @@ npm run dev
 
 - Frontend deployed on Vercel  
 - Backend deployed on Render  
-- Database hosted on MongoDB Atlas  
-
-## Live Demo
-
-https://task-manager-rust-three.vercel.app/
 
 ### Test Credentials
 

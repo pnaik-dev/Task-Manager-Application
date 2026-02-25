@@ -5,59 +5,62 @@ import { fetchTasks, selectTasks, removeTaskAsync } from '../store/reducers/task
 import { Calendar, CircleCheckBig, FlagTriangleRight, ListTodo, Pencil, Trash2 } from 'lucide-react';
 import { toast } from 'react-toastify';
 
+// TaskDetail component
 const TaskDetail = () => {
-    const { taskId } = useParams();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { tasks } = useSelector(selectTasks);
-    const [task, setTask] = useState(null);
-    const [showModal, setShowModal] = useState(false);
+    const { taskId } = useParams(); // Get the task ID from the URL
+    const dispatch = useDispatch(); // Get the dispatch function
+    const navigate = useNavigate(); // Get the navigate function
+    const { tasks } = useSelector(selectTasks); // Get tasks from the Redux store
+    const [task, setTask] = useState(null); // Initialize the task state
+    const [showModal, setShowModal] = useState(false); // Initialize the modal state
 
-    useEffect(() => {
-        if (!tasks || tasks.length === 0) {
-            dispatch(fetchTasks());
+    useEffect(() => { // Fetch tasks when the component mounts
+        if (!tasks || tasks.length === 0) { // If tasks are not yet fetched
+            dispatch(fetchTasks()); // Dispatch the fetchTasks action
         }
-    }, [dispatch, tasks]);
+    }, [dispatch, tasks]); // Dependency array
 
-    useEffect(() => {
-        if (tasks && tasks.length > 0) {
-            const foundTask = tasks.find(task => task._id === taskId);
-            setTask(foundTask);
+    useEffect(() => { // Update the task state when tasks change
+        if (tasks && tasks.length > 0) { // If tasks are available
+            const foundTask = tasks.find(task => task._id === taskId); // Find the task with the matching ID
+            setTask(foundTask); // Update the task state
         }
-    }, [tasks, taskId]);
+    }, [tasks, taskId]); // Dependency array
 
-    if (!task) {
-        return <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">Loading...</div>;
+    if (!task) { // If task is not found
+        return <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">Loading...</div>; // Render a loading message
     }
 
-    const completedSubtasks = task.subtasks?.filter(task => task.status === "Completed").length ?? 0;
-    const totalSubtasks = task.subtasks?.length ?? 0;
-    const progress = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+    const completedSubtasks = task.subtasks?.filter(task => task.status === "Completed").length ?? 0; // Filter completed subtasks
+    const totalSubtasks = task.subtasks?.length ?? 0; // Total number of subtasks
+    const progress = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0; // Calculate progress
 
+    // Priority styles
     const priorityStyles = {
         High: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 ring-rose-500/20',
         Medium: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 ring-amber-500/20',
         Low: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 ring-emerald-500/20',
     };
 
+    // Progress bar styles
     const progressBarStyles = {
         High: 'bg-rose-500 dark:bg-rose-400',
         Medium: 'bg-amber-500 dark:bg-amber-400',
         Low: 'bg-emerald-500 dark:bg-emerald-400',
     };
 
-    const handleDelete = async (taskId) => {
+    const handleDelete = async (taskId) => { // Handle task deletion
         try {
-            await dispatch(removeTaskAsync(taskId)).unwrap();
+            await dispatch(removeTaskAsync(taskId)).unwrap(); // Dispatch delete action
             toast.success("Task deleted successfully!");
             // Fetch tasks again after deletion
-            await dispatch(fetchTasks()).unwrap();
-            navigate("/");
+            await dispatch(fetchTasks()).unwrap(); // Dispatch fetchTasks action
+            navigate("/"); // Navigate to the home page
         } catch (error) {
             console.error("Failed to delete task:", error);
             toast.error("Failed to delete task.");
         }
-        setShowModal(false);
+        setShowModal(false); // Close modal
     };
 
 

@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { addTaskAsync, selectTasks } from "../store/reducers/taskReducer";
 import { toast } from 'react-toastify';
 
+// AddTask component
 const AddTask = () => {
-  const { error } = useSelector(selectTasks);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { error } = useSelector(selectTasks); // Access the error from the Redux store
+  const navigate = useNavigate(); // Get the navigate function
+  const dispatch = useDispatch(); // Get the dispatch function
 
-  const [task, setTask] = useState({
+  const [task, setTask] = useState({ // Initialize the task state
     title: "",
     description: "",
     priority: "Medium",
@@ -17,28 +18,28 @@ const AddTask = () => {
     deadLine: "",
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const response = await dispatch(addTaskAsync(task));
-    if(response.payload){
-        toast.success("Task added successfully!");
-        navigate("/");
+  const handleSubmit = async (e) => { // Handle form submission
+    e.preventDefault(); // Prevent the default form submission behavior
+    const response = await dispatch(addTaskAsync(task)); // Dispatch the addTaskAsync action
+    if(response.payload){ // If the response is successful
+        toast.success("Task added successfully!"); // Show success message
+        navigate("/"); // Navigate to the home page
     }
     else{
-        toast.error("Failed to add task!");
+        toast.error("Failed to add task!"); 
     }
   };
 
-  const addSubtask = () => {
-    setTask({
-      ...task,
-      subtasks: [...task.subtasks, { title: "", status: "Pending" }],
+  const addSubtask = () => { // Function to add a subtask
+    setTask({ // Update the task state
+      ...task, // Spread the previous task state
+      subtasks: [...task.subtasks, { title: "", status: "Pending" }], // Add a new subtask
     });
   };
 
-  const removeSubtask = (index) => {
-    const updatedSubtasks = task.subtasks.filter((_, i) => i !== index);
-    setTask({ ...task, subtasks: updatedSubtasks });
+  const removeSubtask = (index) => { // Function to remove a subtask
+    const updatedSubtasks = task.subtasks.filter((_, i) => i !== index); // Filter out the subtask to be removed
+    setTask({ ...task, subtasks: updatedSubtasks }); // Update the task state
   };
 
   return (

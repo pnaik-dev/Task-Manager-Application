@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateUserAsync, selectUser, changePasswordAsync } from '../store/reducers/userReducer';
 import { toast } from 'react-toastify';
 
-
+// Profile component
 const Profile = () => {
-    const dispatch = useDispatch();
-    const user = useSelector(selectUser);
+    const dispatch = useDispatch(); // Dispatch actions
+    const user = useSelector(selectUser); // Access user data
 
     const [firstName, setFirstName] = useState(user?.data?.firstName || '');
     const [lastName, setLastName] = useState(user?.data?.lastName || '');
@@ -17,55 +17,55 @@ const Profile = () => {
     const [updateError, setUpdateError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
 
-    useEffect(() => {
-        if (user && user.data) {
-            setFirstName(user.data.firstName || '');
+    useEffect(() => { // Update form fields
+        if (user && user.data) { // Check if user data is available
+            setFirstName(user.data.firstName || ''); 
             setLastName(user.data.lastName || '');
             setEmail(user.data.email || '');
         }
-    }, [user]);
+    }, [user]); // Dependency array
 
-    const handleUpdateProfile = async(e) => {
-        e.preventDefault();
-        setUpdateError(null);
-        if (!firstName || !lastName || !email) {
-            setUpdateError("Please fill in all fields.");
-            return;
+    const handleUpdateProfile = async(e) => { // Handle form submission
+        e.preventDefault(); // Prevent the default form submission behavior
+        setUpdateError(null); // Clear any previous errors
+        if (!firstName || !lastName || !email) { // Check if any of the required fields are empty
+            setUpdateError("Please fill in all fields."); // Set error message
+            return; // Exit the function
         }
-        const userData = {
+        const userData = { // Create the user data object
             firstName,
             lastName,
             email,
         };
         try {
-            await dispatch(updateUserAsync(userData)).unwrap();
-            toast.success("Profile updated successfully!");
+            await dispatch(updateUserAsync(userData)).unwrap(); // Dispatch the updateUserAsync action
+            toast.success("Profile updated successfully!"); // Show success message
         } catch (err) {
-            setUpdateError(err?.message || "Failed to update profile.");
-            toast.error(err?.message || "Failed to update profile.");
+            setUpdateError(err?.message || "Failed to update profile."); // Set error message
+            toast.error(err?.message || "Failed to update profile."); // Show error message
         }
     };
 
-    const handleChangePassword = (e) => {
-        e.preventDefault();
-        setPasswordError(null);
-        if (!currentPassword || !newPassword || !confirmPassword) {
-            setPasswordError("Please fill in all password fields.");
-            return;
+    const handleChangePassword = (e) => { // Handle password change
+        e.preventDefault(); // Prevent the default form submission behavior
+        setPasswordError(null); // Clear any previous errors
+        if (!currentPassword || !newPassword || !confirmPassword) { // Check if any of the required fields are empty
+            setPasswordError("Please fill in all password fields."); // Set error message
+            return; // Exit the function
         }
-        if (newPassword !== confirmPassword) {
-            setPasswordError("New password and confirm password do not match.");
-            return;
+        if (newPassword !== confirmPassword) { // Check if new password and confirm password match
+            setPasswordError("New password and confirm password do not match."); // Set error message
+            return; // Exit the function
         }
-        dispatch(changePasswordAsync({ currentPassword, newPassword }))
-            .unwrap()
-            .then(() => {
-                setCurrentPassword('');
-                setNewPassword('');
+        dispatch(changePasswordAsync({ currentPassword, newPassword })) // Dispatch the changePasswordAsync action
+            .unwrap() // Unwrap the promise
+            .then(() => { // Handle success
+                setCurrentPassword(''); 
+                setNewPassword(''); 
                 setConfirmPassword('');
             })
             .catch((err) => {
-                setPasswordError(err || "Failed to change password.");
+                setPasswordError(err || "Failed to change password."); // Set error message
             });
     };
 

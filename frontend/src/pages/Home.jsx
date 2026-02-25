@@ -5,19 +5,20 @@ import { fetchTasks, selectTasks, clearTasks } from '../store/reducers/taskReduc
 import { selectUser } from '../store/reducers/userReducer';
 import TaskCard from '../components/tasks/TaskCard';
 
+// Homepage component
 export default function Homepage() {
-  const { tasks } = useSelector(selectTasks);
-  const { authToken } = useSelector(selectUser);
-  const dispatch = useDispatch();
+  const { tasks } = useSelector(selectTasks); // Get tasks from the Redux store
+  const { authToken } = useSelector(selectUser); // Get user details from the Redux store
+  const dispatch = useDispatch(); // Get the dispatch function
 
-  useEffect(() => {
-    if(authToken){
-        dispatch(fetchTasks());
+  useEffect(() => { // Fetch tasks when the component mounts
+    if(authToken){ // If user is logged in
+        dispatch(fetchTasks()); // Dispatch the fetchTasks action
     }
     else{
-        dispatch(clearTasks())
+        dispatch(clearTasks()) // Clear tasks
     }
-  }, [dispatch, authToken]);
+  }, [dispatch, authToken]); // Dependency array
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 mx-5">

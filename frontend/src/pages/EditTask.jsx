@@ -4,15 +4,16 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { updateTaskAsync, selectTasks } from "../store/reducers/taskReducer";
 import { toast } from "react-toastify";
 
+// EditTask component
 const EditTask = () => {
-    const { taskId } = useParams();
-    const { state } = useLocation();
-    const { task: initialTask } = state.task || { task: null };
-    const { error } = useSelector(selectTasks);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const { taskId } = useParams(); // Get task ID from URL
+    const { state } = useLocation(); // Get state from location
+    const { task: initialTask } = state.task || { task: null }; // Get task from state
+    const { error } = useSelector(selectTasks); // Access the error from the Redux store
+    const navigate = useNavigate(); // Get the navigate function
+    const dispatch = useDispatch(); // Get the dispatch function
 
-    const [task, setTask] = useState({
+    const [task, setTask] = useState({ // Initialize the task state
         title: "",
         description: "",
         priority: "Medium",
@@ -20,60 +21,60 @@ const EditTask = () => {
         deadLine: "",
     });
 
-    useEffect(() => {
-        if (initialTask) {
-            setTask({
-                ...initialTask,
-                deadLine: initialTask.deadLine ? new Date(initialTask.deadLine).toISOString().split('T')[0] : '',
+    useEffect(() => { // Update the task state
+        if (initialTask) { // If initial task is available
+            setTask({ // Update the task state
+                ...initialTask, // Spread the initial task
+                deadLine: initialTask.deadLine ? new Date(initialTask.deadLine).toISOString().split('T')[0] : '', // Convert date to string
             });
         }
-    }, [initialTask]);
+    }, [initialTask]); // Run the effect when initial task changes
 
-    const handleChange = (e) => {
-        if (!e || !e.target) return;
-        const { name, value } = e.target;
-
-        setTask((prevTask) => {
-            let updatedValue = value;
-            if (name === "deadLine") {
-                const selectedDate = new Date(value);
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-                if (selectedDate < today) {
-                    alert("Please select a future date or today.");
-                    updatedValue = prevTask.deadLine;
+    const handleChange = (e) => { // Handle form input changes
+        if (!e || !e.target) return; // If no event or target, return
+        const { name, value } = e.target; // Get input name and value
+ 
+        setTask((prevTask) => { // Update the task state
+            let updatedValue = value; // Updated value
+            if (name === "deadLine") { // If name is deadLine
+                const selectedDate = new Date(value); // Get selected date
+                const today = new Date(); // Get today's date
+                today.setHours(0, 0, 0, 0); // Set time to 00:00:00
+                if (selectedDate < today) { // If selected date is before today
+                    alert("Please select a future date or today."); // Show alert
+                    updatedValue = prevTask.deadLine; // Set updated value to previous value
                 }
             }
-            return { ...prevTask, [name]: updatedValue };
+            return { ...prevTask, [name]: updatedValue }; // Return updated task
         });
     };
 
-    const handleSubtaskChange = (index, field, value) => {
-        const updatedSubtasks = [...task.subtasks];
-        updatedSubtasks[index][field] = value;
-        setTask((prevTask) => ({ ...prevTask, subtasks: updatedSubtasks }));
+    const handleSubtaskChange = (index, field, value) => { // Handle subtask input changes
+        const updatedSubtasks = [...task.subtasks]; // Create a copy of subtasks
+        updatedSubtasks[index][field] = value; // Update the field
+        setTask((prevTask) => ({ ...prevTask, subtasks: updatedSubtasks })); // Update the task state
     };
 
-    const addSubtask = () => {
-        setTask({
-            ...task,
-            subtasks: [...task.subtasks, { title: "", status: "Pending" }],
+    const addSubtask = () => { // Function to add a subtask
+        setTask({ // Update the task state
+            ...task, // Spread the previous task state
+            subtasks: [...task.subtasks, { title: "", status: "Pending" }], // Add a new subtask
         });
     };
 
-    const removeSubtask = (index) => {
-        const updatedSubtasks = task.subtasks.filter((_, i) => i !== index);
-        setTask({ ...task, subtasks: updatedSubtasks });
+    const removeSubtask = (index) => { // Function to remove a subtask
+        const updatedSubtasks = task.subtasks.filter((_, i) => i !== index); // Filter out the subtask to be removed
+        setTask({ ...task, subtasks: updatedSubtasks }); // Update the task state
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (e) => { // Handle form submission
+        e.preventDefault(); // Prevent the default form submission behavior
         try {
-            await dispatch(updateTaskAsync({ taskId, updates: task })).unwrap();
-            toast.success("Task updated successfully!");
-            navigate("/");
+            await dispatch(updateTaskAsync({ taskId, updates: task })).unwrap(); // Dispatch the updateTaskAsync action
+            toast.success("Task updated successfully!"); // Show success message
+            navigate("/"); // Navigate to the home page
         } catch (err) {
-            toast.error(`Failed to update task.${err} `);
+            toast.error(`Failed to update task.${err} `); // Show error message
         }
     };
 
