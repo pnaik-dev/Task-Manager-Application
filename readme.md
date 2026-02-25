@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Task Manager Application
 
 A full-stack task management platform featuring secure authentication, protected APIs, and a modern responsive user interface.
@@ -139,3 +140,6 @@ https://task-manager-rust-three.vercel.app/
 
 Email: testuser@gmail.com  
 Password: Test@123  
+=======
+
+>>>>>>> 9881c6576bc2d23c8d32cbc70348d3336b4a2b37
