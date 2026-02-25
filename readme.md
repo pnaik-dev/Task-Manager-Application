@@ -81,16 +81,16 @@ SALT_ROUNDS=10
 
 ### Frontend
 
-Create a `.env` file in the client directory:
+Create a `.env` file in the frontend directory:
 
 ```
-VITE_API_URL=http://localhost:5173
+VITE_API_URL=http://localhost:3000
 ```
 
 ## Setup Instructions
 
 ```
-git clone https://github.com/pnaik-dev/Task-Manager-Application.git
+git clone https://github.com/your-username/Task-Manager-Application.git
 cd Task-Manager-Application
 ```
 
@@ -105,7 +105,7 @@ npm run dev
 ### Frontend Setup
 
 ```
-cd client
+cd frontend
 npm install
 npm run dev
 ```
