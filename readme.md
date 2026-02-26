@@ -175,5 +175,5 @@ npm run dev
 # 🌍 Deployment
 
 - Frontend deployed on Vercel
-- Backend deployed on Vercel
+- Backend deployed on Render
 
