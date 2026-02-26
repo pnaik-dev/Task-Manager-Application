@@ -1,10 +1,12 @@
 # ✅ Task Manager Application
 
-A production-ready full-stack Task Management platform built using the MERN stack, featuring secure JWT authentication, protected REST APIs, schema validation, user-specific task isolation, and a modern responsive UI.
+A full-stack task management application built using the MERN stack, featuring secure JWT authentication, protected REST APIs, schema validation, user-specific task isolation, and a modern responsive UI.
 
 This project demonstrates clean backend architecture, secure authentication design, input validation, centralized error handling, and production-level frontend state management.
 
-# 🚀 Core Features
+---
+
+# 🚀 Features
 
 ### 🔐 Authentication & Security
 - JWT-based authentication
@@ -28,6 +30,8 @@ This project demonstrates clean backend architecture, secure authentication desi
 - Toast notifications for real-time feedback
 - Fully responsive UI using Tailwind CSS
 - Client-side route protection using React Router
+
+---
 
 # 🏗️ System Architecture
 
@@ -67,6 +71,8 @@ This project demonstrates clean backend architecture, secure authentication desi
 4. Update/Delete operations restricted to task owner  
 5. All requests validated using Zod before database interaction  
 
+---
+
 # 🧠 Tech Stack
 
 ## Frontend
@@ -87,6 +93,8 @@ This project demonstrates clean backend architecture, secure authentication desi
 - bcrypt  
 - Zod Validation   
 
+---
+
 # 🔐 Security Features
 
 - Password hashing with bcrypt + configurable salt rounds  
@@ -97,9 +105,11 @@ This project demonstrates clean backend architecture, secure authentication desi
 - Centralized error handling  
 - Environment variable protection  
 
+---
+
 # ⚙️ Environment Variables
 
-## Backend `.env`
+Create a `.env` file inside the backend directory:
 
 ```env
 # Server
@@ -113,7 +123,7 @@ JWT_SECRET=your_jwt_secret
 SALT_ROUNDS=10
 ```
 
-## Frontend `.env`
+Create a `.env` file inside the frontend directory:
 
 ```env
 VITE_API_URL=http://localhost:3000
@@ -159,6 +169,8 @@ Start frontend:
 cd ../frontend
 npm run dev
 ```
+
+---
 
 # 🌍 Deployment
 
