@@ -1,30 +1,75 @@
-# Task Manager Application
+# ✅ Task Manager Application
 
-A full-stack task management platform featuring secure authentication, protected APIs, and a modern responsive user interface.
+A production-ready full-stack Task Management platform built using the MERN stack, featuring secure JWT authentication, protected REST APIs, schema validation, user-specific task isolation, and a modern responsive UI.
 
-## Overview
+This project demonstrates clean backend architecture, secure authentication design, input validation, centralized error handling, and production-level frontend state management.
 
-This application demonstrates real-world MERN stack development with a focus on scalability, clean architecture, authentication, and performance.
+# 🚀 Core Features
 
-It allows users to securely register, log in, and manage their personal tasks with full CRUD functionality.
+### 🔐 Authentication & Security
+- JWT-based authentication
+- Secure password hashing using bcrypt
+- Protected API routes via authentication middleware
+- Environment-based configuration
+- Secure token validation on each protected request
 
-## Key Features
+### 📝 Task Management
+- Create, Read, Update, Delete (CRUD) operations
+- User-specific task isolation (multi-user secure architecture)
+- Task status updates (e.g., completed / pending)
+- Optimized database queries
+- Input validation using Zod
+- Structured API response handling
 
-- User authentication and authorization using JWT  
-- Secure password hashing using bcrypt  
-- Protected routes with authentication middleware  
-- Task CRUD operations (Create, Read, Update, Delete)  
-- User-specific task isolation  
-- Input validation using Zod  
-- Centralized error handling  
-- Responsive UI for all screen sizes  
-- Redux Toolkit state management  
-- Toast notifications for better UX  
+### 🧠 State & UX
+- Global state management using Redux Toolkit
+- Form handling with React Hook Form
+- Axios-based API communication
+- Toast notifications for real-time feedback
+- Fully responsive UI using Tailwind CSS
+- Client-side route protection using React Router
 
-## Tech Stack
+# 🏗️ System Architecture
 
-### Frontend
+## Backend Architecture
 
+- RESTful API built with Express.js
+- MongoDB database with Mongoose schema modeling
+- JWT-based stateless authentication
+- Zod schema validation for request payloads
+- Middleware-based authentication and error handling
+- Modular folder structure (controllers, routes, models, middleware)
+- Centralized error handling mechanism
+
+## Frontend Architecture
+
+- React.js Single Page Application (Vite)
+- Redux Toolkit for predictable global state management
+- React Hook Form for optimized form validation
+- Axios for API requests with token-based authentication
+- Component-based reusable UI structure
+- Responsive design with Tailwind CSS
+
+---
+
+# 🔄 Application Flow
+
+### Authentication Flow
+1. User registers or logs in  
+2. JWT token generated and returned  
+3. Token stored securely on client  
+4. Protected routes validate JWT on each request  
+
+### Task Flow
+1. Authenticated user creates a task  
+2. Task stored with user reference in MongoDB  
+3. User fetches only their tasks  
+4. Update/Delete operations restricted to task owner  
+5. All requests validated using Zod before database interaction  
+
+# 🧠 Tech Stack
+
+## Frontend
 - React.js  
 - Vite  
 - Tailwind CSS  
@@ -33,41 +78,30 @@ It allows users to securely register, log in, and manage their personal tasks wi
 - Axios  
 - React Router DOM  
 
-### Backend
-
+## Backend
 - Node.js  
 - Express.js  
 - MongoDB  
 - Mongoose  
 - JWT Authentication  
-- Zod Validation  
-- Jest  
-- Supertest  
+- bcrypt  
+- Zod Validation   
 
-## System Design
+# 🔐 Security Features
 
-- RESTful API architecture  
-- Authentication middleware for protected endpoints  
-- MongoDB schema modeling with Mongoose  
-- Centralized error handling middleware  
-- Modular folder structure (controllers, routes, middleware, models)  
+- Password hashing with bcrypt + configurable salt rounds  
+- JWT-based stateless authentication  
+- Protected REST endpoints via middleware  
+- User-specific data isolation  
+- Input validation using Zod schemas  
+- Centralized error handling  
+- Environment variable protection  
 
-## Architecture Overview
+# ⚙️ Environment Variables
 
-- REST-based backend using Express and MongoDB  
-- Token-based authentication using JWT  
-- Secure password hashing using bcrypt  
-- Client-server communication via Axios  
-- Environment-based configuration for development and production  
-- Deployed frontend and backend on separate cloud platforms  
+## Backend `.env`
 
-## Environment Variables
-
-Create a `.env` file in the backend directory:
-
-### Backend
-
-```
+```env
 # Server
 PORT=3000
 
@@ -79,59 +113,55 @@ JWT_SECRET=your_jwt_secret
 SALT_ROUNDS=10
 ```
 
-### Frontend
+## Frontend `.env`
 
-Create a `.env` file in the frontend directory:
-
-```
+```env
 VITE_API_URL=http://localhost:3000
 ```
 
-## Setup Instructions
+---
 
-```
-git clone https://github.com/your-username/Task-Manager-Application.git
-cd Task-Manager-Application
+# 🛠️ Installation & Setup
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/your-username/task-manager-application.git
+cd task-manager-application
 ```
 
-### Backend Setup
+## 2️⃣ Install Backend Dependencies
 
-```
+```bash
 cd backend
 npm install
-npm run dev
 ```
 
-### Frontend Setup
+## 3️⃣ Install Frontend Dependencies
 
-```
-cd frontend
+```bash
+cd ../frontend
 npm install
+```
+
+## 4️⃣ Run Application
+
+Start backend:
+
+```bash
+cd ../backend
 npm run dev
 ```
 
-## API Structure
+Start frontend:
 
-### Authentication Routes
+```bash
+cd ../frontend
+npm run dev
+```
 
-- POST /api/user/signup  
-- POST /api/user/signin  
+# 🌍 Deployment
 
-### Task Routes (Protected)
-
-- GET /api/tasks  
-- GET /api/tasks/:taskId  
-- POST /api/tasks  
-- PATCH /api/tasks/:taskId  
-- DELETE /api/tasks/:taskId  
-
-## Deployment
-
-- Frontend deployed on Vercel  
-- Backend deployed on Render  
-
-### Test Credentials
-
-Email: testuser@gmail.com  
-Password: Test@123  
+- Frontend deployed on Vercel
+- Backend deployed on Vercel
 
