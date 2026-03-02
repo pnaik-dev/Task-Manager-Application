@@ -1,8 +1,8 @@
-# ✅ Task Manager Application
+# 📝 Task Manager Application
 
-A full-stack task management application built using the MERN stack, featuring secure JWT authentication, protected REST APIs, schema validation, user-specific task isolation, and a modern responsive UI.
+A full-stack task management application built with the MERN stack that enables users to securely create, manage, update, and delete tasks. It implements JWT-based authentication, protected RESTful APIs, schema validation, and user-specific data isolation within a modern responsive UI.
 
-This project demonstrates clean backend architecture, secure authentication design, input validation, centralized error handling, and production-level frontend state management.
+The project highlights scalable backend architecture, secure authentication workflows, centralized error handling, and predictable frontend state management aligned with industry best practices.
 
 ---
 
@@ -169,6 +169,24 @@ Start frontend:
 cd ../frontend
 npm run dev
 ```
+
+---
+
+## 📍 API Endpoints
+
+### User Routes
+
+- **POST** `/api/user/signup`
+- **POST** `/api/user/signin`
+- **GET** `/api/user`
+
+### Task Routes
+
+- **GET** `/api/tasks`
+- **GET** `/api/tasks/:taskId`
+- **POST** `/api/tasks`
+- **PATCH** `/api/tasks/:taskId`
+- **DELETE** `/api/tasks/:taskId`
 
 ---
 
