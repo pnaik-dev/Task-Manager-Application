@@ -183,9 +183,9 @@ npm run dev
   Authenticate a user and return a JWT for session management.
 
 - **GET** `/api/user`  
-  Retrieve all users 
+  Retrieve all users.
 
-## 📝 Task Routes
+## 📝 Task Routes (Authenticated Users Only)
 
 - **GET** `/api/tasks`  
   Retrieve all tasks for the authenticated user.
