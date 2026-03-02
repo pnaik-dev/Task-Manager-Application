@@ -172,21 +172,35 @@ npm run dev
 
 ---
 
-## 📍 API Endpoints
+# 📍 API Endpoints
 
-### User Routes
+## 👤 User Routes
 
-- **POST** `/api/user/signup`
-- **POST** `/api/user/signin`
-- **GET** `/api/user`
+- **POST** `/api/user/signup`  
+  Register a new user account.
 
-### Task Routes
+- **POST** `/api/user/signin`  
+  Authenticate a user and return a JWT for session management.
 
-- **GET** `/api/tasks`
-- **GET** `/api/tasks/:taskId`
-- **POST** `/api/tasks`
-- **PATCH** `/api/tasks/:taskId`
-- **DELETE** `/api/tasks/:taskId`
+- **GET** `/api/user`  
+  Retrieve all users 
+
+## 📝 Task Routes
+
+- **GET** `/api/tasks`  
+  Retrieve all tasks for the authenticated user.
+
+- **GET** `/api/tasks/:taskId`  
+  Retrieve a specific task by its ID for the authenticated user.
+
+- **POST** `/api/tasks`  
+  Create a new task for the authenticated user.
+
+- **PATCH** `/api/tasks/:taskId`  
+  Update an existing task (title, description, status, etc.) for the authenticated user.
+
+- **DELETE** `/api/tasks/:taskId`  
+  Delete a specific task belonging to the authenticated user.
 
 ---
 
