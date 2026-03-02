@@ -185,7 +185,7 @@ npm run dev
 - **GET** `/api/user`  
   Retrieve all users.
 
-## 📝 Task Routes (Authenticated Users Only)
+## 📝 Task Routes
 
 - **GET** `/api/tasks`  
   Retrieve all tasks for the authenticated user.
