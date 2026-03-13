@@ -177,13 +177,16 @@ npm run dev
 ## 👤 User Routes
 
 - **POST** `/api/user/signup`  
-  Register a new user account.
+  Registers a new user account.
 
 - **POST** `/api/user/signin`  
-  Authenticate a user and return a JWT for session management.
+  Authenticates a user and return a JWT for session management.
 
-- **GET** `/api/user`  
-  Retrieve all users.
+- **PUT** `/api/user/update`  
+  Updates user profile information.
+
+- **PUT** `/api/user/change-password`  
+  Allows the authenticated user to change their password.
 
 ## 📝 Task Routes
 
@@ -196,7 +199,7 @@ npm run dev
 - **POST** `/api/tasks`  
   Create a new task for the authenticated user.
 
-- **PATCH** `/api/tasks/:taskId`  
+- **PUT** `/api/tasks/:taskId`  
   Update an existing task (title, description, status, etc.) for the authenticated user.
 
 - **DELETE** `/api/tasks/:taskId`  
